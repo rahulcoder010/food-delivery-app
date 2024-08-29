@@ -48,6 +48,6 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }} # Add your token in GitHub repository secrets
         with:
           args: >
-            -Dsonar.projectKey=dev-formoptix_todo
-            -Dsonar.organization=dev-formoptix
+            -Dsonar.projectKey=rahulcoder010_food-delivery-app
+            -Dsonar.organization=rahulcoder010
           projectBaseDir: .
