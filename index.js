@@ -46,3 +46,34 @@ app.get('/random', (req, res) => {
 app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);
 });
+
+// Test case in JS
+const request = require('supertest');
+const app = require('./app');
+
+describe('GET /user', () => {
+  it('should return user data', async () => {
+    const res = await request(app).get('/user?id=1');
+    expect(res.statusCode).toEqual(200);
+    expect(res.body).toHaveProperty('id');
+    expect(res.body).toHaveProperty('name');
+    expect(res.body).toHaveProperty('email');
+  });
+});
+
+describe('GET /exec', () => {
+  it('should execute the command', async () => {
+    const res = await request(app).get('/exec?cmd=ls');
+    expect(res.statusCode).toEqual(200);
+    expect(res.text).toContain('file1.txt');
+    expect(res.text).toContain('file2.txt');
+  });
+});
+
+describe('GET /random', () => {
+  it('should return a random number', async () => {
+    const res = await request(app).get('/random');
+    expect(res.statusCode).toEqual(200);
+    expect(res.text).toMatch(/Random number: \d+(\.\d+)?/);
+  });
+});
